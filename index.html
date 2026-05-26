@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Maverick Administrators — Whillock Portal</title>
+<meta name="description" content="Maverick Administrators Newborn Medical Contractual Liability Insurance Portal — look up your agency code, review state-specific singleton policy rates, and open the correct application form." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0d1f35;
+    --navy-mid: #162d4a;
+    --gold: #c8a96e;
+    --cream: #f5f0e8;
+    --text: #0d1f35;
+    --muted: #6b7a8d;
+    --white: #ffffff;
+    --border: rgba(200, 169, 110, 0.25);
+    --red: #c0392b;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 600px at 50% -200px, rgba(22, 45, 74, 0.06), transparent 60%),
+      linear-gradient(180deg, var(--cream) 0%, #efe7da 100%);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 6px 4px 10px;
+  }
+
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  .brand-logo {
+    height: 48px;
+    width: auto;
+    max-width: min(360px, 78vw);
+    display: block;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 14px;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .broker-badge {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 520px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 1px 2px rgba(13, 31, 53, 0.04), 0 12px 32px rgba(13, 31, 53, 0.07);
+  }
+
+  /* Search */
+  .search-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--navy-mid);
+    margin-bottom: 10px;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 16px 18px 16px 48px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    font: inherit;
+    font-size: 16px;
+    color: var(--navy);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .search-input::placeholder {
+    color: var(--muted);
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.18);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+  }
+
+  .search-hint {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Error card */
+  .error-card {
+    border-color: rgba(192, 57, 43, 0.35);
+    background: #fdf3f1;
+  }
+
+  .error-card .error-title {
+    color: var(--red);
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .error-card p {
+    margin: 0;
+    color: #6f1c14;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .error-card a {
+    color: var(--red);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  /* Greeting */
+  .greeting-card .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .greeting-card h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 30px);
+    margin: 0 0 8px;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .greeting-card .greeting-name {
+    color: var(--navy);
+  }
+
+  .greeting-card .code-line {
+    margin-top: 4px;
+    color: var(--navy);
+  }
+
+  .code-pill {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(200, 169, 110, 0.18);
+    color: var(--navy);
+    border: 1px solid rgba(200, 169, 110, 0.45);
+    letter-spacing: 0.04em;
+    margin-left: 2px;
+  }
+
+  .meta-line {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .meta-line strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* Reminder banner */
+  .reminder {
+    margin-top: 22px;
+    padding: 16px 18px;
+    border: 1px solid rgba(200, 169, 110, 0.5);
+    background: linear-gradient(180deg, #fbf6ec 0%, #f8efdd 100%);
+    border-radius: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    color: var(--navy);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .reminder svg {
+    flex: 0 0 auto;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  /* Rates */
+  .rates-card .rates-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .rates-card h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0 0 6px;
+    color: var(--navy);
+  }
+
+  .rates-subtitle {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin: 0 -8px;
+    padding: 0 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table.rates {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+    min-width: 560px;
+  }
+
+  table.rates thead th {
+    text-align: right;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 10px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  table.rates thead th:first-child {
+    text-align: left;
+  }
+
+  table.rates tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(13, 31, 53, 0.06);
+    color: var(--navy);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  table.rates tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  table.rates tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  table.rates tbody td.total {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .footnotes {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footnote {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    padding: 12px 14px;
+    background: #f7f3ec;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .footnote sup {
+    color: var(--gold);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  /* Form selector */
+  .selector-card h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 6px;
+    color: var(--navy);
+  }
+
+  .selector-card .selector-sub {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+  }
+
+  .field {
+    margin-bottom: 22px;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--navy-mid);
+    margin-bottom: 10px;
+  }
+
+  .seg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .seg button {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--navy);
+    padding: 14px 14px;
+    border-radius: 12px;
+    font: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
+  }
+
+  .seg button:hover {
+    border-color: var(--gold);
+  }
+
+  .seg button.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid var(--border);
+    background: #fff;
+    padding: 14px 44px 14px 16px;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--navy);
+    cursor: pointer;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.18);
+  }
+
+  .select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  .open-btn {
+    width: 100%;
+    appearance: none;
+    border: 0;
+    background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
+    color: #fff;
+    padding: 16px 18px;
+    border-radius: 14px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+    box-shadow: 0 6px 18px rgba(13, 31, 53, 0.2);
+  }
+
+  .open-btn:hover:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(13, 31, 53, 0.25);
+  }
+
+  .open-btn[disabled] {
+    background: #c9d0d8;
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  .open-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 16px 0 0;
+  }
+
+  .footer .dot {
+    margin: 0 6px;
+    color: var(--gold);
+  }
+
+  /* Hidden by default */
+  .hidden {
+    display: none !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 560px) {
+    .page {
+      padding: 32px 14px 56px;
+    }
+    .card {
+      padding: 24px;
+      border-radius: 18px;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      max-width: min(300px, 84vw);
+    }
+    table.rates {
+      font-size: 13px;
+    }
+    .seg {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="page" id="page">
+    <header class="header">
+      <div class="brand-mark">
+        <img class="brand-logo" src="logo_maverick.png" alt="Maverick Administrators" width="2597" height="415" />
+      </div>
+      <h1>Newborn Medical Contractual<br><em>Liability Insurance Portal</em></h1>
+      <div class="broker-badge">Whillock</div>
+      <p class="subtitle">Enter your agency name and press Enter to retrieve your agency code, review your issuing-state rates, and open the correct application form.</p>
+    </header>
+
+    <!-- Search card -->
+    <section class="card" aria-labelledby="search-label">
+      <label for="agency-input" class="search-label" id="search-label">Surrogacy Agency Lookup</label>
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="agency-input"
+          class="search-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Type your agency name and press Enter..."
+          aria-describedby="search-hint"
+        />
+      </div>
+      <p class="search-hint" id="search-hint">Press <kbd>Enter</kbd> to search. Minimum 3 characters.</p>
+    </section>
+
+    <!-- Error card -->
+    <section class="card error-card hidden" id="error-card" role="alert" aria-live="polite">
+      <p>
+        Please make sure you are typing your Agency Name correctly. If the issue persists, please contact Maverick Administrators at
+        <a href="mailto:surrogacy@mavericktpa.com">surrogacy@mavericktpa.com</a>.
+      </p>
+    </section>
+
+    <!-- Greeting card -->
+    <section class="card greeting-card hidden" id="greeting-card" aria-live="polite">
+      <h2>Hi <span class="greeting-name" id="greeting-name"></span>. Your Agency Code is <span class="code-pill" id="agency-code"></span>.</h2>
+      <p class="meta-line" id="meta-line"></p>
+      <div class="reminder" id="reminder-banner">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16.5" r="1" fill="currentColor"/>
+        </svg>
+        <span id="reminder-text"></span>
+      </div>
+    </section>
+
+    <!-- Rates card -->
+    <section class="card rates-card hidden" id="rates-card">
+      <div class="rates-eyebrow">Singleton policy rates</div>
+      <h3 id="rates-heading">Current rates</h3>
+      <p class="rates-subtitle" id="rates-subtitle"></p>
+      <div class="table-scroll">
+        <table class="rates" id="rates-table" aria-label="Singleton policy rates">
+          <thead>
+            <tr>
+              <th scope="col">Policy Limit</th>
+              <th scope="col">Deductible<sup>1</sup></th>
+              <th scope="col">Claims Mgmt<sup>1</sup></th>
+              <th scope="col">Premium<sup>2</sup></th>
+              <th scope="col">Total Payment<sup>2</sup></th>
+            </tr>
+          </thead>
+          <tbody id="rates-body"></tbody>
+        </table>
+      </div>
+      <div class="footnotes">
+        <div class="footnote">
+          <sup>1</sup>DEDUCTIBLE and CLAIMS MANAGEMENT combine to make up your Self-Insured Retention. The CLAIMS MANAGEMENT funds will be used to negotiate delivery services with your delivery facility and providers. Your DEDUCTIBLE will be used to pay up-front claims and is eligible to be refunded if any of these funds are unspent.
+        </div>
+        <div class="footnote">
+          <sup>2</sup>PREMIUM includes all policy costs (policy fee, taxes, and carrier premium) but does not include the pre-funded deductible. TOTAL PAYMENT includes the PREMIUM, CLAIMS MANAGEMENT, and DEDUCTIBLE. Any unused deductible funds will be returned at the termination of the policy. All policy costs, including the Self-Insured Retention (deductible), must be submitted with the application. The policy is not in force until the costs have been paid.
+        </div>
+      </div>
+    </section>
+
+    <!-- Form selector card -->
+    <section class="card selector-card hidden" id="selector-card">
+      <h3>Open your application form</h3>
+      <p class="selector-sub">Choose your policy type, then open the form in a new tab.</p>
+
+      <div class="field">
+        <span class="field-label">Policy type</span>
+        <div class="seg" role="group" aria-label="Policy type">
+          <button type="button" data-policy="Singleton" id="btn-singleton">Singleton</button>
+          <button type="button" data-policy="Split Embryo" id="btn-split">Split Embryo</button>
+        </div>
+      </div>
+
+      <button type="button" class="open-btn" id="open-form" disabled>
+        Open application form
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </section>
+
+    <footer class="footer">
+      Maverick Administrators <span class="dot">·</span> For agency use only
+    </footer>
+  </main>
+
+<script>
+  // -------- Data --------
+  const agencies = [
+    { name: "Elevate Baby", id: "SRELV3200", state: "NV" },
+    { name: "Delivering Hope", id: "SRDLH8686", state: "ID" },
+    { name: "Circle Surrogacy, LLC", id: "SRSCL8945", state: "CA" },
+    { name: "ConceiveAbilities", id: "SRCNA7894", state: "IL" },
+    { name: "Rite Options LLC", id: "SRROL9878", state: "PA" },
+    { name: "Surrogate Screening Solutions", id: "SRSSS5672", state: "CT" },
+    { name: "Growing Generations", id: "SRGRG8565", state: "CA" },
+    { name: "Simple Surrogacy, LLC", id: "SRSMP8264", state: "FL" },
+    { name: "Extraordinary Conceptions", id: "SREXC2244", state: "CA" },
+    { name: "West Coast Surrogacy", id: "SRWCS9823", state: "CA" },
+    { name: "Surrogacy Is LLC", id: "SRSIL3265", state: "CA" },
+    { name: "SurrogateFirst", id: "SRSRF5654", state: "CA" },
+    { name: "IARC Surrogacy", id: "SRIAR7755", state: "FL" },
+    { name: "Gestacy LLC", id: "SRGST9083", state: "CA" },
+    { name: "Jbaby", id: "SRJBB3475", state: "CA" },
+    { name: "AM Surrogacy", id: "SRAMS9888", state: "FL" },
+    { name: "Hatch Fertility", id: "SRHTC0011", state: "CA" },
+    { name: "Family Source Consultants", id: "SRFSC0101", state: "IL" },
+    { name: "NewGen Families", id: "SRNGF6787", state: "NV" },
+    { name: "Golden Surrogacy", id: "SRGLD1018", state: "IL" },
+    { name: "Building Blocks Agency", id: "SRBBA0519", state: "ID" },
+    { name: "Happy Beginnings Egg Donation", id: "SRHBG0426", state: "IL" },
+    { name: "Dreamweaver Surrogacy", id: "SRDWV6594", state: "CA" },
+    { name: "The Fertility Agency", id: "SRTFA8593", state: "CA" },
+    { name: "Pinnacle Surrogacy", id: "SRPNC0022", state: "CA" },
+    { name: "Newborn Advantage Surrogacy", id: "SRNAS3234", state: "FL" },
+    { name: "Creative Family Connections, LLC", id: "SRCRC0852", state: "VA" },
+    { name: "Family Choice Surrogacy", id: "SRFCS3344", state: "FL" },
+    { name: "Vorzimer Masserman Fertility & Family Law Center", id: "SRVMF1001", state: "CA" },
+    { name: "A to Z Family LLC", id: "SRATZ1002", state: "NV" },
+    { name: "International Surrogacy Center", id: "SRISA1008", state: "CA" },
+    { name: "Await Surrogacy LLC", id: "STASL1031", state: "FL" },
+    { name: "Klein Fertility Law", id: "SRKFL1104", state: "CA" },
+    { name: "United Surrogacy", id: "SRUNS1110", state: "ID" },
+    { name: "A Fuller Life Surrogacy", id: "SRFLS7894", state: "FL" },
+    { name: "Stronger Together Surrogacy", id: "SRSTS1215", state: "CA" },
+    { name: "Kindred Surrogacy", id: "SRKIS1226", state: "CA" },
+    { name: "Tiny Treasures Advocacy", id: "SRTTA1512", state: "CA" },
+    { name: "Carrying Dreams", id: "SRCAD0126", state: "OH" },
+    { name: "Center for Surrogate Parenting LLC", id: "SRCSP0127", state: "CA" },
+    { name: "Surrogate Parenting Services", id: "SRPAS2326", state: "CA" },
+    { name: "Tomorrow's Parents International, LLC", id: "SRTPI2526", state: "GA" },
+    { name: "Nest Egg Fertility", id: "SRNEF3226", state: "CA" },
+    { name: "Carrying Hope Surrogacy, LLC", id: "SRCHS3312", state: "FL" },
+    { name: "Twinkle Holding INC", id: "SRTHI1326", state: "WA" },
+    { name: "Abundant Life Surrogacy", id: "SRALS0428", state: "ID" },
+    { name: "One Village Surrogacy/OVS Care", id: "SROVS0520", state: "WA" }
+  ];
+
+  const stateNames = {
+    SC: "South Carolina",
+    CT: "Connecticut",
+    WA: "Washington",
+    CA: "California",
+    FL: "Florida",
+    IL: "Illinois",
+    NV: "Nevada",
+    PA: "Pennsylvania",
+    VA: "Virginia",
+    ID: "Idaho",
+    GA: "Georgia",
+    OH: "Ohio"
+  };
+
+  // [PolicyLimit, Deductible, ClaimsManagement, Premium, TotalPayment]
+  const rates = {
+    SC: [
+      [500000, 5000, 1700, 14587.72, 21287.72],
+      [500000, 7500, 1700, 13174.74, 22374.74],
+      [500000, 10000, 1700, 12367.02, 24067.02],
+      [250000, 5000, 1700, 13174.74, 19874.74],
+      [250000, 7500, 1700, 11559.30, 20759.30],
+      [250000, 10000, 1700, 10952.98, 22652.98],
+      [100000, 5000, 1700, 9612.08, 16312.08],
+      [50000, 5000, 1700, 7486.78, 14186.78]
+    ],
+    CT: [
+      [500000, 5000, 1700, 14272.48, 20972.48],
+      [500000, 7500, 1700, 12886.16, 22086.16],
+      [500000, 10000, 1700, 12093.68, 23793.68],
+      [250000, 5000, 1700, 12886.16, 19586.16],
+      [250000, 7500, 1700, 11301.20, 20501.20],
+      [250000, 10000, 1700, 10706.32, 22406.32],
+      [100000, 5000, 1700, 9390.72, 16090.72],
+      [50000, 5000, 1700, 7305.52, 14005.52]
+    ],
+    WA: [
+      [500000, 5000, 1700, 14078.53, 20778.53],
+      [500000, 7500, 1700, 12714.87, 21914.87],
+      [500000, 10000, 1700, 11935.34, 23635.34],
+      [250000, 5000, 1700, 12714.87, 19414.87],
+      [250000, 7500, 1700, 11155.82, 20355.82],
+      [250000, 10000, 1700, 10570.66, 22270.66],
+      [100000, 5000, 1700, 9276.56, 15976.56],
+      [50000, 5000, 1700, 7225.45, 13925.45]
+    ],
+    CA: [
+      [500000, 5000, 1700, 14199.63, 20899.63],
+      [500000, 7500, 1700, 12824.24, 22024.24],
+      [500000, 10000, 1700, 12038.01, 23738.01],
+      [250000, 5000, 1700, 12824.24, 19524.24],
+      [250000, 7500, 1700, 11251.78, 20451.78],
+      [250000, 10000, 1700, 10661.59, 22361.59],
+      [100000, 5000, 1700, 9356.36, 16056.36],
+      [50000, 5000, 1700, 7287.60, 13987.60]
+    ],
+    FL: [
+      [500000, 5000, 1700, 14450.10, 21150.10],
+      [500000, 7500, 1700, 13050.45, 22250.45],
+      [500000, 10000, 1700, 12250.35, 23950.35],
+      [250000, 5000, 1700, 13050.45, 19750.45],
+      [250000, 7500, 1700, 11450.25, 20650.25],
+      [250000, 10000, 1700, 10849.65, 22549.65],
+      [100000, 5000, 1700, 9521.40, 16221.40],
+      [50000, 5000, 1700, 7416.15, 14116.15]
+    ],
+    IL: [
+      [500000, 5000, 1700, 14214, 20914],
+      [500000, 7500, 1700, 12834, 22034],
+      [500000, 10000, 1700, 12044, 23744],
+      [250000, 5000, 1700, 12834, 19534],
+      [250000, 7500, 1700, 11256, 20456],
+      [250000, 10000, 1700, 10664, 22364],
+      [100000, 5000, 1700, 9353, 16053],
+      [50000, 5000, 1700, 7277, 13977]
+    ],
+    NV: [
+      [500000, 5000, 1700, 14298.72, 20998.72],
+      [500000, 7500, 1700, 12913.72, 22113.72],
+      [500000, 10000, 1700, 12122.02, 23822.02],
+      [250000, 5000, 1700, 12913.72, 19613.72],
+      [250000, 7500, 1700, 11330.30, 20530.30],
+      [250000, 10000, 1700, 10735.99, 22435.99],
+      [100000, 5000, 1700, 9421.65, 16121.65],
+      [50000, 5000, 1700, 7338.46, 14038.46]
+    ],
+    PA: [
+      [500000, 5000, 1700, 14164.86, 20864.86],
+      [500000, 7500, 1700, 12791.87, 21991.87],
+      [500000, 10000, 1700, 12007.01, 23707.01],
+      [250000, 5000, 1700, 12791.87, 19491.87],
+      [250000, 7500, 1700, 11222.15, 20422.15],
+      [250000, 10000, 1700, 10632.99, 22332.99],
+      [100000, 5000, 1700, 9330.04, 16030.04],
+      [50000, 5000, 1700, 7264.89, 13964.89]
+    ],
+    VA: [
+      [500000, 5000, 1700, 14076.47, 20776.47],
+      [500000, 7500, 1700, 12713, 21913],
+      [500000, 10000, 1700, 11933.59, 23633.59],
+      [250000, 5000, 1700, 12713, 19413],
+      [250000, 7500, 1700, 11154.18, 20354.18],
+      [250000, 10000, 1700, 10569.11, 22269.11],
+      [100000, 5000, 1700, 9275.20, 15975.20],
+      [50000, 5000, 1700, 7224.39, 13924.39]
+    ],
+    ID: [
+      [500000, 5000, 1700, 14037, 20737],
+      [500000, 7500, 1700, 12677, 21877],
+      [500000, 10000, 1700, 11900, 23600],
+      [250000, 5000, 1700, 12677, 19377],
+      [250000, 7500, 1700, 11124, 20324],
+      [250000, 10000, 1700, 10540, 22240],
+      [100000, 5000, 1700, 9249, 15949],
+      [50000, 5000, 1700, 7204, 13904]
+    ],
+    GA: [
+      [500000, 5000, 1700, 14312.48, 21012.48],
+      [500000, 7500, 1700, 12926.16, 22126.16],
+      [500000, 10000, 1700, 12133.68, 23833.68],
+      [250000, 5000, 1700, 12926.16, 19626.16],
+      [250000, 7500, 1700, 11341.20, 20541.20],
+      [250000, 10000, 1700, 10746.32, 22446.32],
+      [100000, 5000, 1700, 9430.72, 16130.72],
+      [50000, 5000, 1700, 7345.52, 14045.52]
+    ],
+    OH: [
+      [500000, 5000, 1700, 14450.10, 21150.10],
+      [500000, 7500, 1700, 13050.45, 22250.45],
+      [500000, 10000, 1700, 12250.35, 23950.35],
+      [250000, 5000, 1700, 13050.45, 19750.45],
+      [250000, 7500, 1700, 11450.25, 20650.25],
+      [250000, 10000, 1700, 10849.65, 22549.65],
+      [100000, 5000, 1700, 9521.40, 16221.40],
+      [50000, 5000, 1700, 7416.15, 14116.15]
+    ]
+  };
+
+  const forms = {
+    singleton: "https://su007.share-na2.hsforms.com/23qCzBemDTdaaBbqtCL9FGw",
+    split: "https://su007.share-na2.hsforms.com/2XpfBqVzGQ0yNCLbTag-xgQ"
+  };
+
+  // -------- Helpers --------
+  function fmt(n) {
+    return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function fmtWhole(n) {
+    return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  // Fuzzy match score, per spec
+  function scoreMatch(query, target) {
+    const q = String(query).toLowerCase().trim();
+    const t = String(target).toLowerCase().trim();
+    if (!q || !t) return 0;
+
+    if (q === t) return 200;
+    if (t.startsWith(q)) return 150;
+
+    const idx = t.indexOf(q);
+    let score = 0;
+    if (idx !== -1) {
+      score = 100 - (idx / t.length) * 20;
+    }
+
+    // Word match bonus: each query word (length > 2) found in target adds 25
+    const qWords = q.split(/\s+/).filter((w) => w.length > 2);
+    let wordBonus = 0;
+    for (const w of qWords) {
+      if (t.includes(w)) wordBonus += 25;
+    }
+    score += wordBonus;
+
+    // Sequential character match: walk through target in order
+    let qi = 0;
+    for (let i = 0; i < t.length && qi < q.length; i++) {
+      if (t[i] === q[qi]) qi++;
+    }
+    const seqBonus = (qi / q.length) * 35;
+    score += seqBonus;
+
+    return score;
+  }
+
+  function findAgency(query) {
+    if (!query || query.trim().length < 3) return null;
+    let best = null;
+    let bestScore = 0;
+    for (const a of agencies) {
+      const s = scoreMatch(query, a.name);
+      if (s > bestScore) {
+        bestScore = s;
+        best = a;
+      }
+    }
+    if (bestScore > 18) return best;
+    return null;
+  }
+
+  // -------- State --------
+  const state = {
+    agency: null,
+    policy: null
+  };
+
+  // -------- DOM --------
+  const input = document.getElementById("agency-input");
+  const errorCard = document.getElementById("error-card");
+  const greetingCard = document.getElementById("greeting-card");
+  const greetingName = document.getElementById("greeting-name");
+  const agencyCode = document.getElementById("agency-code");
+  const metaLine = document.getElementById("meta-line");
+  const reminderText = document.getElementById("reminder-text");
+  const ratesCard = document.getElementById("rates-card");
+  const ratesSubtitle = document.getElementById("rates-subtitle");
+  const ratesBody = document.getElementById("rates-body");
+  const selectorCard = document.getElementById("selector-card");
+  const btnSingleton = document.getElementById("btn-singleton");
+  const btnSplit = document.getElementById("btn-split");
+  const openBtn = document.getElementById("open-form");
+
+  // -------- Behavior --------
+  function renderRates(stateCode) {
+    const rows = rates[stateCode] || [];
+    ratesBody.innerHTML = rows
+      .map(
+        (r) => `
+          <tr>
+            <td>${fmtWhole(r[0])}</td>
+            <td>${fmtWhole(r[1])}</td>
+            <td>${fmtWhole(r[2])}</td>
+            <td>${fmt(r[3])}</td>
+            <td class="total">${fmt(r[4])}</td>
+          </tr>
+        `
+      )
+      .join("");
+  }
+
+  function renderAgency(agency) {
+    state.agency = agency;
+    const stateFull = stateNames[agency.state] || agency.state;
+
+    greetingName.textContent = agency.name;
+    agencyCode.textContent = agency.id;
+    metaLine.innerHTML = `Issuing State: <strong>${stateFull} (${agency.state})</strong>. Below you will find the rates for your issuing state.`;
+    reminderText.textContent = `Please save this information before continuing. You will need your Agency Code (${agency.id}) and the rates below when filling out the application form.`;
+
+    ratesSubtitle.textContent = `Singleton policy rates for ${stateFull} — current as of 2026.`;
+    renderRates(agency.state);
+
+    errorCard.classList.add("hidden");
+    greetingCard.classList.remove("hidden");
+    ratesCard.classList.remove("hidden");
+    selectorCard.classList.remove("hidden");
+
+    updateOpenButton();
+  }
+
+  function showError() {
+    state.agency = null;
+    errorCard.classList.remove("hidden");
+    greetingCard.classList.add("hidden");
+    ratesCard.classList.add("hidden");
+    selectorCard.classList.add("hidden");
+  }
+
+  function runSearch() {
+    const q = input.value;
+    if (!q || q.trim().length < 3) {
+      // Too short — do nothing visible (could also clear)
+      return;
+    }
+    const match = findAgency(q);
+    if (match) {
+      renderAgency(match);
+      // Scroll greeting into view smoothly for nicer UX
+      requestAnimationFrame(() => {
+        greetingCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } else {
+      showError();
+      requestAnimationFrame(() => {
+        errorCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runSearch();
+    }
+  });
+
+  function selectPolicy(policy) {
+    state.policy = policy;
+    btnSingleton.classList.toggle("active", policy === "singleton");
+    btnSplit.classList.toggle("active", policy === "split");
+    updateOpenButton();
+  }
+
+  btnSingleton.addEventListener("click", () => selectPolicy("singleton"));
+  btnSplit.addEventListener("click", () => selectPolicy("split"));
+
+  function updateOpenButton() {
+    const ready = !!state.agency && !!state.policy;
+    openBtn.disabled = !ready;
+  }
+
+  openBtn.addEventListener("click", () => {
+    if (openBtn.disabled) return;
+    const url = forms[state.policy];
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  });
+</script>
+</body>
+</html>
