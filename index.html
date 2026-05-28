@@ -47,7 +47,7 @@
   }
 
   .page {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 48px 20px 80px;
     display: flex;
@@ -349,7 +349,8 @@
     border-bottom: none;
   }
 
-  table.rates tbody td.total {
+  table.rates tbody td.total,
+  table.rates tbody td.total-col {
     font-weight: 700;
     color: var(--navy);
   }
@@ -371,6 +372,22 @@
     border-radius: 10px;
   }
 
+  .footnote:has(.fn-mark) {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .fn-mark {
+    flex: 0 0 auto;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .fn-text {
+    flex: 1 1 auto;
+  }
+
   .footnote sup {
     color: var(--gold);
     font-weight: 700;
@@ -390,6 +407,104 @@
     color: var(--muted);
     font-size: 14.5px;
     margin: 0 0 22px;
+  }
+
+  .checklist-header {
+    margin-bottom: 20px;
+  }
+
+  .checklist-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--navy);
+    margin: 0 0 4px;
+  }
+
+  .checklist-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .checklist-box {
+    border-radius: 14px;
+    padding: 18px 16px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .checklist-box h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .checklist-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist-box ul li {
+    padding: 2px 0;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .checklist-box ul li::before {
+    content: '·';
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .checklist-box ul li.optional {
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .box-agency {
+    background: rgba(13, 31, 53, 0.05);
+    color: var(--navy);
+  }
+
+  .box-agency h4 {
+    color: var(--navy);
+    border-color: rgba(13, 31, 53, 0.15);
+  }
+
+  .box-ip {
+    background: rgba(200, 169, 110, 0.12);
+    color: #5a4a2a;
+  }
+
+  .box-ip h4 {
+    color: #7a5f2a;
+    border-color: rgba(200, 169, 110, 0.3);
+  }
+
+  .box-surrogate {
+    background: rgba(45, 122, 79, 0.08);
+    color: #1e4d32;
+  }
+
+  .box-surrogate h4 {
+    color: #1e4d32;
+    border-color: rgba(45, 122, 79, 0.2);
   }
 
   .field {
@@ -555,6 +670,12 @@
     }
   }
 
+  @media (max-width: 800px) {
+    .checklist-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       transition: none !important;
@@ -646,10 +767,122 @@
       </div>
     </section>
 
+    <!-- Split Embryo Rates card -->
+    <section class="card rates-card hidden" id="rates-card-se">
+      <div class="rates-eyebrow">Split Embryo policy rates</div>
+      <h3>Split Embryo Policy Rates</h3>
+      <p class="rates-subtitle" id="rates-subtitle-se"></p>
+      <div class="reminder">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 8v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1" fill="currentColor"/>
+        </svg>
+        <span><strong>Please note:</strong> If the embryo splits, the policy limit will be reduced by 50%.</span>
+      </div>
+      <div class="table-scroll">
+        <table class="rates" id="rates-table-se" aria-label="Split Embryo policy rates">
+          <thead>
+            <tr>
+              <th scope="col">Policy Limit<br>(Singleton/Split)</th>
+              <th scope="col">Deductible*</th>
+              <th scope="col">Claims Mgmt*</th>
+              <th scope="col">Premium**</th>
+              <th scope="col">Pre-Transfer***</th>
+              <th scope="col">Post-Transfer***</th>
+              <th scope="col">Total Payment</th>
+            </tr>
+          </thead>
+          <tbody id="rates-body-se"></tbody>
+        </table>
+      </div>
+      <div class="footnotes">
+        <div class="footnote">
+          <div class="fn-mark">*</div>
+          <div class="fn-text">
+            <strong>SELF-INSURED RETENTION</strong> is comprised of your <strong>DEDUCTIBLE</strong> and <strong>CLAIMS MANAGEMENT</strong> cost. The CLAIMS MANAGEMENT funds will be used to negotiate delivery services with your delivery facility and providers. Your DEDUCTIBLE will be used to pay up-front claims and is eligible to be refunded if any of these funds are unspent.
+          </div>
+        </div>
+        <div class="footnote">
+          <div class="fn-mark">**</div>
+          <div class="fn-text">
+            <strong>PREMIUM</strong> includes all policy costs (policy fee, taxes, and carrier premium) but does not include the pre-funded deductible. <strong>TOTAL PAYMENT</strong> includes the PREMIUM, CLAIMS MANAGEMENT, and DEDUCTIBLE. Any unused deductible funds will be returned at the termination of the policy. All policy costs, including the Self-Insured Retention (deductible), must be submitted with the application. The policy is not in force until the costs have been paid.
+          </div>
+        </div>
+        <div class="footnote">
+          <div class="fn-mark">***</div>
+          <div class="fn-text">
+            Pre-Transfer payment must be made at least 10 days prior to the transfer. The post-transfer payment must be completed by 16 weeks post transfer.
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Form selector card -->
     <section class="card selector-card hidden" id="selector-card">
       <h3>Open your application form</h3>
       <p class="selector-sub">Choose your policy type, then open the form in a new tab.</p>
+
+      <div class="checklist-header">
+        <h3 class="checklist-title">Before You Start — Information Required</h3>
+        <p class="checklist-subtitle">Please have the following information ready before opening the application form.</p>
+      </div>
+
+      <div class="checklist-grid">
+        <div class="checklist-box box-agency">
+          <h4>From the Agency</h4>
+          <ul>
+            <li>Agency Contact First Name</li>
+            <li>Agency Contact Last Name</li>
+            <li>Agency Contact Email Address</li>
+            <li>Agency Contact Phone Number</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box box-ip">
+          <h4>From the Intended Parent(s)</h4>
+          <ul>
+            <li>Primary IP First Name</li>
+            <li>Primary IP Last Name</li>
+            <li>Primary IP Date of Birth</li>
+            <li>Primary IP Phone Number</li>
+            <li>Primary IP Email Address</li>
+            <li>Primary IP Full Address</li>
+            <li class="optional">Secondary IP Name (optional)</li>
+            <li class="optional">Secondary IP Email (optional)</li>
+            <li>Deductible Selection</li>
+            <li>Policy Limit Selection</li>
+            <li>Escrow Account (if applicable: company name, phone &amp; email)</li>
+            <li>Preferred Payment Method</li>
+            <li>Date of Embryo Transfer</li>
+            <li>Expected Due Date</li>
+            <li>Newborn Gender (if known)</li>
+            <li>Newborn Last Name</li>
+          </ul>
+        </div>
+
+        <div class="checklist-box box-surrogate">
+          <h4>From the Surrogate &amp; Delivery</h4>
+          <ul>
+            <li>First Name</li>
+            <li>Last Name</li>
+            <li>Date of Birth</li>
+            <li>Phone Number</li>
+            <li>Email Address</li>
+            <li>Full Address</li>
+            <li>Social Security Number</li>
+            <li><strong>Health Screening:</strong></li>
+            <li>BMI % (33.0 or below required)</li>
+            <li>At least one prior healthy pregnancy</li>
+            <li>Age 41+ at date of transfer</li>
+            <li>Prior history of: preterm labor (&lt;37 wks), pre-eclampsia/eclampsia, diabetes, gestational diabetes requiring hospitalization, 3+ prior c-sections, 6+ prior pregnancies, delivery within last 9 months, miscarriage beyond 16 weeks, placental abruption, placental previa</li>
+            <li><strong>Delivery Information:</strong></li>
+            <li>OB Name &amp; Phone Number</li>
+            <li>Delivery Facility Name, Phone &amp; Full Address</li>
+            <li>Birth Plan</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="field">
         <span class="field-label">Policy type</span>
@@ -864,6 +1097,106 @@
     ]
   };
 
+  // [PolicyLimitSingleton, PolicyLimitSplitEmbryo, Deductible, ClaimsMgmt, Premium, PaymentPreTransfer, PaymentPostTransfer, TotalPayment]
+  const ratesSE = {
+    SC: [
+      [500000, 250000, 5000, 1700, 18297.72, 6101.22, 18896.50, 24997.72],
+      [500000, 250000, 7500, 1700, 16884.74, 5687.99, 20396.75, 26084.74],
+      [500000, 250000, 10000, 1700, 16077.02, 5451.77, 22325.25, 27777.02],
+      [250000, 125000, 5000, 1700, 16884.74, 5687.99, 17896.75, 23584.74],
+      [250000, 125000, 7500, 1700, 15269.30, 5215.55, 19253.75, 24469.30],
+      [250000, 125000, 10000, 1700, 14662.98, 5038.23, 21324.75, 26362.98]
+    ],
+    CT: [
+      [500000, 250000, 5000, 1700, 17912.48, 5715.98, 18896.50, 24612.48],
+      [500000, 250000, 7500, 1700, 16526.16, 5329.41, 20396.75, 25726.16],
+      [500000, 250000, 10000, 1700, 15733.68, 5108.43, 22325.25, 27433.68],
+      [250000, 125000, 5000, 1700, 16526.16, 5329.41, 17896.75, 23226.16],
+      [250000, 125000, 7500, 1700, 14941.20, 4887.45, 19253.75, 24141.20],
+      [250000, 125000, 10000, 1700, 14346.32, 4721.57, 21324.75, 26046.32]
+    ],
+    WA: [
+      [500000, 250000, 5000, 1700, 17659.03, 5462.53, 18896.50, 24359.03],
+      [500000, 250000, 7500, 1700, 16295.37, 5098.62, 20396.75, 25495.37],
+      [500000, 250000, 10000, 1700, 15515.84, 4890.59, 22325.25, 27215.84],
+      [250000, 125000, 5000, 1700, 16295.37, 5098.62, 17896.75, 22995.37],
+      [250000, 125000, 7500, 1700, 14736.32, 4682.57, 19253.75, 23936.32],
+      [250000, 125000, 10000, 1700, 14151.16, 4526.41, 21324.75, 25851.16]
+    ],
+    CA: [
+      [500000, 250000, 5000, 1700, 17810.93, 5614.43, 18896.50, 24510.93],
+      [500000, 250000, 7500, 1700, 16435.54, 5238.79, 20396.75, 25635.54],
+      [500000, 250000, 10000, 1700, 15649.31, 5024.06, 22325.25, 27349.31],
+      [250000, 125000, 5000, 1700, 16435.54, 5238.79, 17896.75, 23135.54],
+      [250000, 125000, 7500, 1700, 14863.08, 4809.33, 19253.75, 24063.08],
+      [250000, 125000, 10000, 1700, 14272.89, 4648.14, 21324.75, 25972.89]
+    ],
+    FL: [
+      [500000, 250000, 5000, 1700, 18125.10, 5928.60, 18896.50, 24825.10],
+      [500000, 250000, 7500, 1700, 16725.45, 5528.70, 20396.75, 25925.45],
+      [500000, 250000, 10000, 1700, 15925.35, 5300.10, 22325.25, 27625.35],
+      [250000, 125000, 5000, 1700, 16725.45, 5528.70, 17896.75, 23425.45],
+      [250000, 125000, 7500, 1700, 15125.25, 5071.50, 19253.75, 24325.25],
+      [250000, 125000, 10000, 1700, 14524.65, 4899.90, 21324.75, 26224.65]
+    ],
+    IL: [
+      [500000, 250000, 5000, 1700, 17838.00, 5641.50, 18896.50, 24538.00],
+      [500000, 250000, 7500, 1700, 16458.00, 5261.25, 20396.75, 25658.00],
+      [500000, 250000, 10000, 1700, 15669.00, 5043.75, 22325.25, 27369.00],
+      [250000, 125000, 5000, 1700, 16458.00, 5262.25, 17896.75, 23158.00],
+      [250000, 125000, 7500, 1700, 14879.00, 4825.25, 19253.75, 24079.00],
+      [250000, 125000, 10000, 1700, 14287.00, 4662.25, 21324.75, 25987.00]
+    ],
+    NV: [
+      [500000, 250000, 5000, 1700, 17935.22, 5738.72, 18896.50, 24635.22],
+      [500000, 250000, 7500, 1700, 16550.24, 5353.49, 20396.75, 25750.24],
+      [500000, 250000, 10000, 1700, 15758.52, 5133.27, 22325.25, 27458.52],
+      [250000, 125000, 5000, 1700, 16550.24, 5353.49, 17896.75, 23250.24],
+      [250000, 125000, 7500, 1700, 14966.80, 4913.05, 19253.75, 24166.80],
+      [250000, 125000, 10000, 1700, 14372.49, 4747.74, 21324.75, 26072.49]
+    ],
+    PA: [
+      [500000, 250000, 5000, 1700, 17769.86, 5573.36, 18896.50, 24469.86],
+      [500000, 250000, 7500, 1700, 16396.87, 5200.12, 20396.75, 25596.87],
+      [500000, 250000, 10000, 1700, 15612.01, 4986.76, 22325.25, 27312.01],
+      [250000, 125000, 5000, 1700, 16396.87, 5200.12, 17896.75, 23096.87],
+      [250000, 125000, 7500, 1700, 14827.15, 4773.40, 19253.75, 24027.15],
+      [250000, 125000, 10000, 1700, 14237.99, 4613.24, 21324.75, 25937.99]
+    ],
+    VA: [
+      [500000, 250000, 5000, 1700, 17656.44, 5459.94, 18896.50, 24356.44],
+      [500000, 250000, 7500, 1700, 16292.98, 5096.23, 20396.75, 25492.98],
+      [500000, 250000, 10000, 1700, 15513.57, 4888.32, 22325.25, 27213.57],
+      [250000, 125000, 5000, 1700, 16292.98, 5096.23, 17896.75, 22992.98],
+      [250000, 125000, 7500, 1700, 14734.15, 4680.40, 19253.75, 23934.15],
+      [250000, 125000, 10000, 1700, 14149.08, 4524.33, 21324.75, 25849.08]
+    ],
+    ID: [
+      [500000, 250000, 5000, 1700, 17607.00, 5410.50, 18896.50, 24307.00],
+      [500000, 250000, 7500, 1700, 16248.00, 5051.25, 20396.75, 25448.00],
+      [500000, 250000, 10000, 1700, 15471.00, 4845.75, 22325.25, 27171.00],
+      [250000, 125000, 5000, 1700, 16248.00, 5051.25, 17896.75, 22948.00],
+      [250000, 125000, 7500, 1700, 14693.00, 4639.25, 19253.75, 23893.00],
+      [250000, 125000, 10000, 1700, 14109.00, 4484.25, 21324.75, 25809.00]
+    ],
+    GA: [
+      [500000, 250000, 5000, 1700, 17952.48, 5755.98, 18896.50, 24652.48],
+      [500000, 250000, 7500, 1700, 16566.16, 5369.41, 20396.75, 25766.16],
+      [500000, 250000, 10000, 1700, 15773.68, 5148.43, 22325.25, 27473.68],
+      [250000, 125000, 5000, 1700, 16566.16, 5369.41, 17896.75, 23266.16],
+      [250000, 125000, 7500, 1700, 14981.20, 4927.45, 19253.75, 24181.20],
+      [250000, 125000, 10000, 1700, 14386.32, 4761.57, 21324.75, 26086.32]
+    ],
+    OH: [
+      [500000, 250000, 5000, 1700, 18125.10, 5928.60, 18896.50, 24825.10],
+      [500000, 250000, 7500, 1700, 16725.45, 5528.70, 20396.75, 25925.45],
+      [500000, 250000, 10000, 1700, 15925.35, 5300.10, 22325.25, 27625.35],
+      [250000, 125000, 5000, 1700, 16725.45, 5528.70, 17896.75, 23425.45],
+      [250000, 125000, 7500, 1700, 15125.25, 5071.50, 19253.75, 24325.25],
+      [250000, 125000, 10000, 1700, 14524.55, 4899.80, 21324.75, 26224.55]
+    ]
+  };
+
   const forms = {
     singleton: "https://su007.share-na2.hsforms.com/23qCzBemDTdaaBbqtCL9FGw",
     split: "https://su007.share-na2.hsforms.com/2XpfBqVzGQ0yNCLbTag-xgQ"
@@ -944,6 +1277,9 @@
   const ratesCard = document.getElementById("rates-card");
   const ratesSubtitle = document.getElementById("rates-subtitle");
   const ratesBody = document.getElementById("rates-body");
+  const ratesCardSE = document.getElementById("rates-card-se");
+  const ratesSubtitleSE = document.getElementById("rates-subtitle-se");
+  const ratesBodySE = document.getElementById("rates-body-se");
   const selectorCard = document.getElementById("selector-card");
   const btnSingleton = document.getElementById("btn-singleton");
   const btnSplit = document.getElementById("btn-split");
@@ -967,6 +1303,25 @@
       .join("");
   }
 
+  function renderRatesSE(stateCode) {
+    const rows = ratesSE[stateCode] || [];
+    ratesBodySE.innerHTML = rows
+      .map(
+        (r) => `
+          <tr>
+            <td>${fmtWhole(r[0])} / ${fmtWhole(r[1])}</td>
+            <td>${fmtWhole(r[2])}</td>
+            <td>${fmtWhole(r[3])}</td>
+            <td>${fmt(r[4])}</td>
+            <td>${fmt(r[5])}</td>
+            <td>${fmt(r[6])}</td>
+            <td class="total-col">${fmt(r[7])}</td>
+          </tr>
+        `
+      )
+      .join("");
+  }
+
   function renderAgency(agency) {
     state.agency = agency;
     const stateFull = stateNames[agency.state] || agency.state;
@@ -978,10 +1333,13 @@
 
     ratesSubtitle.textContent = `Singleton policy rates for ${stateFull} — current as of 2026.`;
     renderRates(agency.state);
+    ratesSubtitleSE.textContent = `Split Embryo policy rates for ${stateFull} — current as of 2026`;
+    renderRatesSE(agency.state);
 
     errorCard.classList.add("hidden");
     greetingCard.classList.remove("hidden");
     ratesCard.classList.remove("hidden");
+    ratesCardSE.classList.remove("hidden");
     selectorCard.classList.remove("hidden");
 
     updateOpenButton();
@@ -992,6 +1350,7 @@
     errorCard.classList.remove("hidden");
     greetingCard.classList.add("hidden");
     ratesCard.classList.add("hidden");
+    ratesCardSE.classList.add("hidden");
     selectorCard.classList.add("hidden");
   }
 
