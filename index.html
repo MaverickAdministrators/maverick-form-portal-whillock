@@ -477,6 +477,70 @@
     font-style: italic;
   }
 
+  .sublist-wrap {
+    width: 100%;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sublist-wrap::before {
+    display: none;
+  }
+
+  .two-col-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 12px;
+    padding: 4px 0 0 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .two-col-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 1px 0;
+  }
+
+  .two-col-list li::before {
+    content: '•';
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #1e4d32;
+  }
+
+  .new-agency-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: rgba(200, 169, 110, 0.1);
+    border: 1px solid rgba(200, 169, 110, 0.35);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .new-agency-notice svg {
+    stroke: var(--gold);
+  }
+
+  .new-agency-notice a {
+    color: var(--navy);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .new-agency-notice a:hover {
+    color: var(--gold);
+  }
+
   .box-agency {
     background: rgba(13, 31, 53, 0.05);
     color: var(--navy);
@@ -698,6 +762,14 @@
     <!-- Search card -->
     <section class="card" aria-labelledby="search-label">
       <label for="agency-input" class="search-label" id="search-label">Surrogacy Agency Lookup</label>
+      <div class="new-agency-notice">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>
+          Not an approved agency yet? Please complete the
+          <a href="https://share-na2.hsforms.com/2XRnyEcg8TuWMGCM1zsfaVQsu007" target="_blank">New Agency / Entity Set-Up Form</a>
+          to begin your approval process.
+        </span>
+      </div>
       <div class="search-wrap">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
@@ -875,7 +947,21 @@
             <li>BMI % (33.0 or below required)</li>
             <li>At least one prior healthy pregnancy</li>
             <li>Age 41+ at date of transfer</li>
-            <li>Prior history of: preterm labor (&lt;37 wks), pre-eclampsia/eclampsia, diabetes, gestational diabetes requiring hospitalization, 3+ prior c-sections, 6+ prior pregnancies, delivery within last 9 months, miscarriage beyond 16 weeks, placental abruption, placental previa</li>
+            <li><strong>Prior history of:</strong></li>
+            <li class="sublist-wrap">
+              <ul class="two-col-list">
+                <li>Preterm labor before week 37</li>
+                <li>Pre-eclampsia or eclampsia</li>
+                <li>Diabetes</li>
+                <li>Gestational diabetes requiring hospitalization</li>
+                <li>Three or more prior c-sections</li>
+                <li>Six or more prior pregnancies</li>
+                <li>Delivery within the last 9 months</li>
+                <li>Miscarriage beyond 16 weeks</li>
+                <li>Placental abruption</li>
+                <li>Placental previa</li>
+              </ul>
+            </li>
             <li><strong>Delivery Information:</strong></li>
             <li>OB Name &amp; Phone Number</li>
             <li>Delivery Facility Name, Phone &amp; Full Address</li>
