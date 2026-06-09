@@ -704,6 +704,148 @@
     color: var(--gold);
   }
 
+  /* Agency Guide card */
+  .guide-card {
+    background: var(--white);
+  }
+
+  .guide-inner {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+  }
+
+  .guide-thumb-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    width: 200px;
+  }
+
+  .guide-thumb {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(13, 31, 53, 0.06), 0 14px 30px rgba(13, 31, 53, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .guide-thumb:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(13, 31, 53, 0.1), 0 20px 40px rgba(13, 31, 53, 0.18);
+  }
+
+  .guide-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--navy);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid var(--navy);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .guide-download-btn svg {
+    color: var(--gold);
+    flex: 0 0 auto;
+  }
+
+  .guide-download-btn:hover {
+    background: var(--navy-mid);
+    transform: translateY(-1px);
+  }
+
+  .guide-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .guide-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .guide-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--navy);
+    margin: 0 0 12px;
+  }
+
+  .guide-desc {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 18px;
+  }
+
+  .guide-highlights {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guide-highlights li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--navy);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
+  .guide-highlights li svg {
+    flex: 0 0 auto;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .guide-tip {
+    margin: 0;
+    padding: 14px 16px;
+    border-left: 3px solid var(--gold);
+    background: linear-gradient(180deg, #fbf6ec 0%, #f8efdd 100%);
+    border-radius: 0 12px 12px 0;
+    color: var(--navy);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 600px) {
+    .guide-inner {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .guide-thumb-wrap {
+      width: 100%;
+      max-width: 240px;
+      align-self: center;
+    }
+    .guide-title {
+      font-size: 22px;
+    }
+  }
+
   /* Hidden by default */
   .hidden {
     display: none !important;
@@ -807,6 +949,55 @@
           <circle cx="12" cy="16.5" r="1" fill="currentColor"/>
         </svg>
         <span id="reminder-text"></span>
+      </div>
+    </section>
+
+    <!-- Agency Guide card -->
+    <section class="card guide-card" id="guideCard" style="display:none;">
+      <div class="guide-inner">
+        <div class="guide-thumb-wrap">
+          <img src="agency-guide-cover.png" alt="Agency Guide Cover" class="guide-thumb" />
+          <a href="agency-guide.pdf" download="Newborn_Insurance_Agency_Guide.pdf" class="guide-download-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 11l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+        <div class="guide-content">
+          <div class="guide-label">Agency Resource</div>
+          <h3 class="guide-title">Newborn Insurance Agency Guide</h3>
+          <p class="guide-desc">A complete reference for agencies enrolling intended parents and surrogates in the Newborn Medical Contractual Liability Insurance program. It walks you through the enrollment process, explains policy options, and answers the questions we hear most often — so you can guide your clients with confidence.</p>
+          <ul class="guide-highlights">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Step-by-step enrollment and application instructions
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Singleton and split-embryo policy options explained
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Coverage details, deductibles, and payment timelines
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Frequently asked questions and contact information
+            </li>
+          </ul>
+          <p class="guide-tip"><strong>Tip:</strong> Save this guide and share it with your team. Keeping it handy makes it easy to answer client questions and complete enrollments without delay.</p>
+        </div>
       </div>
     </section>
 
@@ -1364,6 +1555,7 @@
   const agencyCode = document.getElementById("agency-code");
   const metaLine = document.getElementById("meta-line");
   const reminderText = document.getElementById("reminder-text");
+  const guideCard = document.getElementById("guideCard");
   const ratesCard = document.getElementById("rates-card");
   const ratesSubtitle = document.getElementById("rates-subtitle");
   const ratesBody = document.getElementById("rates-body");
@@ -1428,6 +1620,7 @@
 
     errorCard.classList.add("hidden");
     greetingCard.classList.remove("hidden");
+    guideCard.style.display = "block";
     ratesCard.classList.remove("hidden");
     ratesCardSE.classList.remove("hidden");
     selectorCard.classList.remove("hidden");
@@ -1439,6 +1632,7 @@
     state.agency = null;
     errorCard.classList.remove("hidden");
     greetingCard.classList.add("hidden");
+    guideCard.style.display = "none";
     ratesCard.classList.add("hidden");
     ratesCardSE.classList.add("hidden");
     selectorCard.classList.add("hidden");
