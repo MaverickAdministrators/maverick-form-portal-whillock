@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0d1f35" />
 <title>Maverick Administrators — Whillock Portal</title>
 <meta name="description" content="Maverick Administrators Newborn Medical Contractual Liability Insurance Portal — look up your agency code, review state-specific singleton policy rates, and open the correct application form." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,13 +13,52 @@
   :root {
     --navy: #0d1f35;
     --navy-mid: #162d4a;
+    --navy-deep: #091627;
     --gold: #c8a96e;
+    --gold-deep: #b08f52;
+    --gold-soft: rgba(200, 169, 110, 0.14);
     --cream: #f5f0e8;
     --text: #0d1f35;
-    --muted: #6b7a8d;
+    --muted: #66758a;
     --white: #ffffff;
     --border: rgba(200, 169, 110, 0.25);
     --red: #c0392b;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-card:
+      0 1px 2px rgba(13, 31, 53, 0.04),
+      0 8px 24px rgba(13, 31, 53, 0.06),
+      0 28px 56px -28px rgba(13, 31, 53, 0.12);
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes row-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rule-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
   }
 
   *,
@@ -37,8 +77,9 @@
     font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     color: var(--text);
     background:
-      radial-gradient(1200px 600px at 50% -200px, rgba(22, 45, 74, 0.06), transparent 60%),
-      linear-gradient(180deg, var(--cream) 0%, #efe7da 100%);
+      radial-gradient(1200px 600px at 50% -200px, rgba(22, 45, 74, 0.07), transparent 60%),
+      radial-gradient(900px 520px at 88% -80px, rgba(200, 169, 110, 0.09), transparent 65%),
+      linear-gradient(180deg, var(--cream) 0%, #efe6d8 100%);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -46,77 +87,169 @@
     font-size: 16px;
   }
 
-  .page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 48px 20px 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  ::selection {
+    background: rgba(200, 169, 110, 0.35);
+    color: var(--navy);
   }
 
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 6px 4px 10px;
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
   }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: -64px auto 0;
+    padding: 0 20px 88px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 64px 20px 128px;
+    background:
+      radial-gradient(900px 420px at 12% -10%, rgba(200, 169, 110, 0.14), transparent 60%),
+      radial-gradient(1100px 520px at 88% -5%, rgba(85, 125, 175, 0.2), transparent 60%),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 90px),
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 90px),
+      linear-gradient(160deg, #081523 0%, var(--navy) 55%, #152941 100%);
+    border-bottom: 1px solid rgba(200, 169, 110, 0.3);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    transform: translateX(-50%);
+    width: min(560px, 80vw);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 169, 110, 0.9), transparent);
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-inner > * {
+    animation: rise 640ms var(--ease-out) both;
+  }
+
+  .hero-inner > :nth-child(2) { animation-delay: 90ms; }
+  .hero-inner > :nth-child(3) { animation-delay: 180ms; }
+  .hero-inner > :nth-child(4) { animation-delay: 270ms; }
+  .hero-inner > :nth-child(5) { animation-delay: 340ms; }
 
   .brand-mark {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 24px;
+    margin: 0 auto 36px;
   }
 
   .brand-logo {
-    height: 48px;
+    height: 44px;
     width: auto;
     max-width: min(360px, 78vw);
     display: block;
+    filter: brightness(0) invert(1);
+    opacity: 0.96;
   }
 
   h1 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(32px, 5vw, 44px);
-    line-height: 1.1;
-    margin: 0 0 14px;
-    color: var(--navy);
-    letter-spacing: -0.01em;
+    font-size: clamp(38px, 6vw, 62px);
+    line-height: 1.05;
+    margin: 0;
+    color: #f7f3ea;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
   }
 
   h1 em {
-    color: var(--gold);
     font-style: italic;
+    color: var(--gold);
+    background: linear-gradient(105deg, #ecd5a0 0%, var(--gold) 45%, #a98748 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .broker-badge {
     display: inline-block;
-    background: var(--navy);
-    color: var(--gold);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    background: rgba(200, 169, 110, 0.08);
+    color: #e3c98f;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 16px;
+    padding: 7px 18px;
+    border: 1px solid rgba(200, 169, 110, 0.45);
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .header-rule {
+    width: 84px;
+    height: 2px;
+    margin: 26px auto 22px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform-origin: center;
+    animation: rule-grow 900ms var(--ease-out) 350ms both;
   }
 
   .subtitle {
-    font-size: 16px;
-    color: var(--muted);
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: rgba(229, 234, 242, 0.72);
     margin: 0 auto;
-    max-width: 520px;
+    max-width: 580px;
+    text-wrap: pretty;
   }
 
   /* Card */
   .card {
+    position: relative;
     background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 36px;
-    box-shadow: 0 1px 2px rgba(13, 31, 53, 0.04), 0 12px 32px rgba(13, 31, 53, 0.07);
+    border-radius: 22px;
+    padding: 40px;
+    box-shadow: var(--shadow-card);
+    animation: rise 560ms var(--ease-out) both;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+
+  .page > section.card:first-of-type {
+    animation-delay: 110ms;
+  }
+
+  .footer {
+    animation: rise 640ms var(--ease-out) 180ms both;
   }
 
   /* Search */
@@ -136,24 +269,33 @@
 
   .search-input {
     width: 100%;
-    padding: 16px 18px 16px 48px;
+    padding: 17px 18px 17px 50px;
     border: 1px solid var(--border);
     border-radius: 14px;
     background: #fff;
     font: inherit;
     font-size: 16px;
     color: var(--navy);
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
   }
 
   .search-input::placeholder {
     color: var(--muted);
+    transition: opacity 200ms ease;
+  }
+
+  .search-input:hover {
+    border-color: rgba(200, 169, 110, 0.5);
   }
 
   .search-input:focus {
     outline: none;
     border-color: var(--gold);
-    box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.18);
+    box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.18), 0 4px 14px rgba(13, 31, 53, 0.06);
+  }
+
+  .search-input:focus::placeholder {
+    opacity: 0.55;
   }
 
   .search-icon {
@@ -165,18 +307,42 @@
     pointer-events: none;
     width: 20px;
     height: 20px;
+    transition: color 200ms ease;
+  }
+
+  .search-wrap:focus-within .search-icon {
+    color: var(--gold-deep);
   }
 
   .search-hint {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 13px;
     color: var(--muted);
+  }
+
+  kbd {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--navy);
+    background: #fff;
+    border: 1px solid rgba(13, 31, 53, 0.18);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 2px 7px;
+    margin: 0 2px;
+    line-height: 1.4;
   }
 
   /* Error card */
   .error-card {
     border-color: rgba(192, 57, 43, 0.35);
     background: #fdf3f1;
+  }
+
+  .error-card::before {
+    background: linear-gradient(90deg, transparent, rgba(192, 57, 43, 0.65) 30%, rgba(192, 57, 43, 0.65) 70%, transparent);
   }
 
   .error-card .error-title {
@@ -199,38 +365,75 @@
   .error-card a {
     color: var(--red);
     text-decoration: underline;
+    text-underline-offset: 3px;
     font-weight: 600;
+    transition: color 160ms ease;
   }
 
-  /* Greeting */
+  .error-card a:hover {
+    color: #8f2a1f;
+  }
+
+  /* Greeting — dark showcase card */
+  .greeting-card {
+    background:
+      radial-gradient(700px 320px at 90% -20%, rgba(200, 169, 110, 0.16), transparent 60%),
+      linear-gradient(150deg, #0a1828 0%, var(--navy) 50%, #18304c 100%);
+    border-color: rgba(200, 169, 110, 0.4);
+  }
+
   .greeting-card .eyebrow {
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.18em;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .greeting-card h2 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(24px, 3.4vw, 30px);
+    font-size: clamp(26px, 3.6vw, 34px);
     margin: 0 0 8px;
-    color: var(--navy);
-    line-height: 1.2;
+    color: #f7f3ea;
+    line-height: 1.25;
   }
 
   .greeting-card .greeting-name {
-    color: var(--navy);
+    color: #ffffff;
   }
 
   .greeting-card .code-line {
     margin-top: 4px;
-    color: var(--navy);
+    color: #f7f3ea;
+  }
+
+  .greeting-card .meta-line {
+    color: rgba(229, 234, 242, 0.72);
+  }
+
+  .greeting-card .meta-line strong {
+    color: #e3c98f;
+  }
+
+  .greeting-card .code-pill {
+    color: #f5e9d4;
+    background: rgba(200, 169, 110, 0.16);
+    border-color: rgba(200, 169, 110, 0.55);
+  }
+
+  .greeting-card .code-pill:hover {
+    background: rgba(200, 169, 110, 0.32);
+  }
+
+  .greeting-card .code-pill::after {
+    background: var(--gold);
+    color: var(--navy-deep);
   }
 
   .code-pill {
+    position: relative;
     display: inline-block;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 14px;
@@ -242,6 +445,42 @@
     border: 1px solid rgba(200, 169, 110, 0.45);
     letter-spacing: 0.04em;
     margin-left: 2px;
+    cursor: copy;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out);
+  }
+
+  .code-pill:hover {
+    background: rgba(200, 169, 110, 0.3);
+    border-color: var(--gold);
+  }
+
+  .code-pill:active {
+    transform: scale(0.96);
+  }
+
+  .code-pill::after {
+    content: 'Copied!';
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%) translateY(4px);
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 7px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms var(--ease-out);
+  }
+
+  .code-pill.copied::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   .meta-line {
@@ -278,19 +517,37 @@
   }
 
   /* Rates */
+  .rates-card .rates-eyebrow,
+  .guide-label,
+  .greeting-card .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rates-card .rates-eyebrow::before,
+  .guide-label::before,
+  .greeting-card .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    flex: 0 0 auto;
+  }
+
   .rates-card .rates-eyebrow {
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--gold);
-    margin-bottom: 10px;
+    letter-spacing: 0.16em;
+    color: var(--gold-deep);
+    margin-bottom: 12px;
   }
 
   .rates-card h3 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-weight: 400;
-    font-size: 24px;
+    font-size: clamp(24px, 3vw, 28px);
     margin: 0 0 6px;
     color: var(--navy);
   }
@@ -332,8 +589,17 @@
     text-align: left;
   }
 
+  table.rates tbody tr {
+    animation: row-in 420ms var(--ease-out) both;
+    transition: background 160ms ease;
+  }
+
+  table.rates tbody tr:hover {
+    background: var(--gold-soft);
+  }
+
   table.rates tbody td {
-    padding: 12px 10px;
+    padding: 13px 10px;
     border-bottom: 1px solid rgba(13, 31, 53, 0.06);
     color: var(--navy);
     text-align: right;
@@ -353,6 +619,11 @@
   table.rates tbody td.total-col {
     font-weight: 700;
     color: var(--navy);
+    background: var(--gold-soft);
+  }
+
+  table.rates thead th:last-child {
+    color: var(--gold-deep);
   }
 
   .footnotes {
@@ -398,7 +669,7 @@
   .selector-card h3 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-weight: 400;
-    font-size: 22px;
+    font-size: clamp(22px, 3vw, 26px);
     margin: 0 0 6px;
     color: var(--navy);
   }
@@ -440,6 +711,12 @@
     padding: 18px 16px;
     font-size: 12px;
     line-height: 1.7;
+    transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+  }
+
+  .checklist-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px rgba(13, 31, 53, 0.18);
   }
 
   .checklist-box h4 {
@@ -534,11 +811,12 @@
     color: var(--navy);
     font-weight: 500;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    transition: color 160ms ease;
   }
 
   .new-agency-notice a:hover {
-    color: var(--gold);
+    color: var(--gold-deep);
   }
 
   .box-agency {
@@ -602,17 +880,25 @@
     font-weight: 500;
     font-size: 15px;
     cursor: pointer;
-    transition: border-color 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
+    transition: border-color 180ms ease, background 180ms ease, color 180ms ease,
+      transform 180ms var(--ease-out), box-shadow 180ms ease;
   }
 
   .seg button:hover {
     border-color: var(--gold);
+    background: var(--gold-soft);
+    transform: translateY(-1px);
+  }
+
+  .seg button:active {
+    transform: scale(0.98);
   }
 
   .seg button.active {
-    background: var(--navy);
+    background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
     border-color: var(--navy);
     color: var(--white);
+    box-shadow: 0 6px 16px -6px rgba(13, 31, 53, 0.4);
   }
 
   .select-wrap {
@@ -653,29 +939,50 @@
   }
 
   .open-btn {
+    position: relative;
+    overflow: hidden;
     width: 100%;
     appearance: none;
     border: 0;
-    background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
-    color: #fff;
-    padding: 16px 18px;
+    background: linear-gradient(180deg, #d8bd84 0%, var(--gold) 40%, var(--gold-deep) 100%);
+    color: var(--navy-deep);
+    padding: 17px 18px;
     border-radius: 14px;
     font: inherit;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 16px;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
-    box-shadow: 0 6px 18px rgba(13, 31, 53, 0.2);
+    transition: transform 180ms var(--ease-out), box-shadow 180ms ease, opacity 180ms ease;
+    box-shadow: 0 8px 22px -6px rgba(176, 143, 82, 0.55);
+  }
+
+  .open-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 600ms var(--ease-out);
+    pointer-events: none;
   }
 
   .open-btn:hover:not([disabled]) {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(13, 31, 53, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -8px rgba(176, 143, 82, 0.65);
+  }
+
+  .open-btn:hover:not([disabled])::after {
+    transform: translateX(100%);
+  }
+
+  .open-btn:active:not([disabled]) {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 5px 14px -4px rgba(176, 143, 82, 0.5);
   }
 
   .open-btn[disabled] {
@@ -689,14 +996,22 @@
   .open-btn svg {
     width: 16px;
     height: 16px;
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .open-btn:hover:not([disabled]) svg {
+    transform: translate(2px, -2px);
   }
 
   /* Footer */
   .footer {
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--muted);
-    padding: 16px 0 0;
+    padding: 20px 0 0;
   }
 
   .footer .dot {
@@ -706,7 +1021,7 @@
 
   /* Agency Guide card */
   .guide-card {
-    background: var(--white);
+    background: linear-gradient(180deg, #ffffff 0%, #fbf6ec 100%);
   }
 
   .guide-inner {
@@ -763,7 +1078,12 @@
 
   .guide-download-btn:hover {
     background: var(--navy-mid);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -8px rgba(13, 31, 53, 0.45);
+  }
+
+  .guide-download-btn:active {
+    transform: translateY(0) scale(0.98);
   }
 
   .guide-content {
@@ -783,7 +1103,7 @@
   .guide-title {
     font-family: 'DM Serif Display', Georgia, serif;
     font-weight: 400;
-    font-size: 26px;
+    font-size: clamp(26px, 3vw, 30px);
     color: var(--navy);
     margin: 0 0 12px;
   }
@@ -831,21 +1151,6 @@
     line-height: 1.55;
   }
 
-  @media (max-width: 600px) {
-    .guide-inner {
-      flex-direction: column;
-      gap: 20px;
-    }
-    .guide-thumb-wrap {
-      width: 100%;
-      max-width: 240px;
-      align-self: center;
-    }
-    .guide-title {
-      font-size: 22px;
-    }
-  }
-
   /* Hidden by default */
   .hidden {
     display: none !important;
@@ -853,18 +1158,29 @@
 
   /* Responsive */
   @media (max-width: 560px) {
+    .hero {
+      padding: 44px 16px 100px;
+    }
     .page {
-      padding: 32px 14px 56px;
+      margin-top: -52px;
+      padding: 0 14px 56px;
     }
     .card {
-      padding: 24px;
+      padding: 26px 22px;
       border-radius: 18px;
     }
+    .card::before {
+      left: 22px;
+      right: 22px;
+    }
     h1 {
-      font-size: 30px;
+      font-size: 34px;
+    }
+    .brand-mark {
+      margin-bottom: 28px;
     }
     .brand-logo {
-      height: 48px;
+      height: 38px;
       width: auto;
       max-width: min(300px, 84vw);
     }
@@ -882,6 +1198,21 @@
     }
   }
 
+  @media (max-width: 600px) {
+    .guide-inner {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .guide-thumb-wrap {
+      width: 100%;
+      max-width: 240px;
+      align-self: center;
+    }
+    .guide-title {
+      font-size: 22px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       transition: none !important;
@@ -891,16 +1222,19 @@
 </style>
 </head>
 <body>
-  <main class="page" id="page">
-    <header class="header">
+  <header class="hero">
+    <div class="hero-inner">
       <div class="brand-mark">
         <img class="brand-logo" src="logo_maverick.png" alt="Maverick Administrators" width="2597" height="415" />
       </div>
-      <h1>Newborn Medical Contractual<br><em>Liability Insurance Portal</em></h1>
       <div class="broker-badge">Whillock</div>
+      <h1>Newborn Medical Contractual<br><em>Liability Insurance Portal</em></h1>
+      <div class="header-rule" aria-hidden="true"></div>
       <p class="subtitle">Enter your agency name and press Enter to retrieve your agency code, review your issuing-state rates, and open the correct application form.</p>
-    </header>
+    </div>
+  </header>
 
+  <main class="page" id="page">
     <!-- Search card -->
     <section class="card" aria-labelledby="search-label">
       <label for="agency-input" class="search-label" id="search-label">Surrogacy Agency Lookup</label>
@@ -940,6 +1274,7 @@
 
     <!-- Greeting card -->
     <section class="card greeting-card hidden" id="greeting-card" aria-live="polite">
+      <div class="eyebrow">Agency Verified</div>
       <h2>Hi <span class="greeting-name" id="greeting-name"></span>. Your Agency Code is <span class="code-pill" id="agency-code"></span>.</h2>
       <p class="meta-line" id="meta-line"></p>
       <div class="reminder" id="reminder-banner">
@@ -1239,8 +1574,8 @@
     { name: "Twinkle Holding INC", id: "SRTHI1326", state: "WA" },
     { name: "Abundant Life Surrogacy", id: "SRALS0428", state: "ID" },
     { name: "One Village Surrogacy/OVS Care", id: "SROVS0520", state: "WA" },
-    {name:"GRACE LLC", id:"SRGRL0602", state:"CA"},
-    {name:"Shining Light Baby", id:"SRSLB0604", state:"IL"},
+    { name: "GRACE LLC", id: "SRGRL0602", state: "CA" },
+    { name:"Shining Light Baby", id:"SRSLB0604", state:"IL"},
     {name:"Same Love Surrogacy", id:"SRLOV0605", state:"CA"},
     {name:"Ivy Surrogacy", id:"SRIVY2888", state:"CA"},
   ];
@@ -1561,8 +1896,8 @@
   const agencyCode = document.getElementById("agency-code");
   const metaLine = document.getElementById("meta-line");
   const reminderText = document.getElementById("reminder-text");
-  const guideCard = document.getElementById("guideCard");
   const ratesCard = document.getElementById("rates-card");
+  const guideCard = document.getElementById("guideCard");
   const ratesSubtitle = document.getElementById("rates-subtitle");
   const ratesBody = document.getElementById("rates-body");
   const ratesCardSE = document.getElementById("rates-card-se");
@@ -1578,8 +1913,8 @@
     const rows = rates[stateCode] || [];
     ratesBody.innerHTML = rows
       .map(
-        (r) => `
-          <tr>
+        (r, i) => `
+          <tr style="animation-delay:${120 + i * 45}ms">
             <td>${fmtWhole(r[0])}</td>
             <td>${fmtWhole(r[1])}</td>
             <td>${fmtWhole(r[2])}</td>
@@ -1595,8 +1930,8 @@
     const rows = ratesSE[stateCode] || [];
     ratesBodySE.innerHTML = rows
       .map(
-        (r) => `
-          <tr>
+        (r, i) => `
+          <tr style="animation-delay:${120 + i * 45}ms">
             <td>${fmtWhole(r[0])} / ${fmtWhole(r[1])}</td>
             <td>${fmtWhole(r[2])}</td>
             <td>${fmtWhole(r[3])}</td>
@@ -1608,6 +1943,19 @@
         `
       )
       .join("");
+  }
+
+  // Result cards in display order; reveal them with a cascading stagger
+  // and restart the entrance animation on every successful search.
+  const resultCards = [greetingCard, guideCard, ratesCard, ratesCardSE, selectorCard];
+
+  function replayReveal() {
+    resultCards.forEach((el, i) => {
+      el.style.animation = "none";
+      void el.offsetWidth;
+      el.style.animation = "";
+      el.style.animationDelay = i * 90 + "ms";
+    });
   }
 
   function renderAgency(agency) {
@@ -1626,10 +1974,11 @@
 
     errorCard.classList.add("hidden");
     greetingCard.classList.remove("hidden");
-    guideCard.style.display = "block";
     ratesCard.classList.remove("hidden");
     ratesCardSE.classList.remove("hidden");
     selectorCard.classList.remove("hidden");
+    guideCard.style.display = "block";
+    replayReveal();
 
     updateOpenButton();
   }
@@ -1638,10 +1987,13 @@
     state.agency = null;
     errorCard.classList.remove("hidden");
     greetingCard.classList.add("hidden");
-    guideCard.style.display = "none";
     ratesCard.classList.add("hidden");
     ratesCardSE.classList.add("hidden");
     selectorCard.classList.add("hidden");
+    guideCard.style.display = "none";
+    errorCard.style.animation = "none";
+    void errorCard.offsetWidth;
+    errorCard.style.animation = "";
   }
 
   function runSearch() {
@@ -1691,6 +2043,30 @@
     if (openBtn.disabled) return;
     const url = forms[state.policy];
     if (url) window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  // Click-to-copy on the agency code pill
+  agencyCode.title = "Click to copy";
+  agencyCode.setAttribute("role", "button");
+  agencyCode.setAttribute("tabindex", "0");
+
+  let copyTimer = null;
+  function copyAgencyCode() {
+    const code = agencyCode.textContent.trim();
+    if (!code || !navigator.clipboard) return;
+    navigator.clipboard.writeText(code).then(() => {
+      agencyCode.classList.add("copied");
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => agencyCode.classList.remove("copied"), 1400);
+    }).catch(() => {});
+  }
+
+  agencyCode.addEventListener("click", copyAgencyCode);
+  agencyCode.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      copyAgencyCode();
+    }
   });
 </script>
 </body>
