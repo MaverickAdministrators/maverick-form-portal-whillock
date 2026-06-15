@@ -649,6 +649,117 @@
     margin: 0 0 22px;
   }
 
+  .rates-head-row {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .rates-head-left {
+    flex: 1 1 38%;
+    min-width: 0;
+  }
+
+  .rates-head-left .rates-subtitle {
+    margin-bottom: 0;
+  }
+
+  .se-offer {
+    flex: 1 1 62%;
+    min-width: 0;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 14px 16px;
+    border: 1px solid rgba(200, 169, 110, 0.45);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fbf6ec 0%, #f7eedb 100%);
+    color: var(--navy);
+    font-size: 12px;
+    line-height: 1.5;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 30px -22px rgba(13, 31, 53, 0.28);
+  }
+
+  .se-offer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+  }
+
+  .se-offer-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .se-offer-head svg {
+    flex: 0 0 auto;
+    color: var(--gold);
+  }
+
+  .se-offer-head span {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold-deep);
+  }
+
+  .se-offer p {
+    margin: 0 0 8px;
+  }
+
+  .se-offer ul {
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+    display: grid;
+    gap: 5px;
+  }
+
+  .se-offer li {
+    position: relative;
+    padding-left: 17px;
+  }
+
+  .se-offer li::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 7px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .se-offer strong {
+    font-weight: 600;
+  }
+
+  .se-offer .se-offer-note {
+    margin-bottom: 0;
+    font-size: 11px;
+    color: var(--navy-mid);
+  }
+
+  @media (max-width: 760px) {
+    .rates-head-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 18px;
+    }
+    .rates-head-left .rates-subtitle {
+      margin-bottom: 0;
+    }
+  }
+
   .table-scroll {
     overflow-x: auto;
     margin: 0 -8px;
@@ -1852,9 +1963,27 @@
 
     <!-- Rates card -->
     <section class="card rates-card hidden" id="rates-card">
-      <div class="rates-eyebrow">Singleton policy rates</div>
-      <h3 id="rates-heading">Current rates</h3>
-      <p class="rates-subtitle" id="rates-subtitle"></p>
+      <div class="rates-head-row">
+        <div class="rates-head-left">
+          <div class="rates-eyebrow">Singleton policy rates</div>
+          <h3 id="rates-heading">Current rates</h3>
+          <p class="rates-subtitle" id="rates-subtitle"></p>
+        </div>
+        <div class="se-offer">
+          <div class="se-offer-head">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 2l1.7 6.6L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.4z"/>
+            </svg>
+            <span>New — Pre-Transfer Option</span>
+          </div>
+          <p>We are also now offering the option to apply for singleton coverage <strong>pre-transfer</strong>. If coverage is applied for and paid pre-transfer, Convex will provide complimentary split-embryo coverage if that single embryo later splits into a multiple pregnancy.</p>
+          <ul>
+            <li>On the <strong>$50,000</strong> and <strong>$100,000</strong> policy maximums, Convex will include <strong>$25,000</strong> of split-embryo coverage.</li>
+            <li>On the <strong>$250,000</strong> and <strong>$500,000</strong> policy maximums, Convex will include <strong>$55,000</strong> of split-embryo coverage.</li>
+          </ul>
+          <p class="se-offer-note">Payment must be made in full at the time of application approval to receive this offer, and intended parents will have 6 months from the date of payment to complete a successful transfer.</p>
+        </div>
+      </div>
       <div class="table-scroll">
         <table class="rates" id="rates-table" aria-label="Singleton policy rates">
           <thead>
