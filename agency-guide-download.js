@@ -39,6 +39,10 @@ const AGENCY_GUIDE_CONFIG = {
   // Inspect your page and update this if needed.
   agencyCodeSelector: "#agency-code",  // <span class="code-pill" id="agency-code">ABC-123</span>
 
+  // CSS selector for the element that displays the resolved agency name on screen.
+  // Used for the downloaded filename (not the PDF content).
+  agencyNameSelector: "#greeting-name",  // <span class="greeting-name" id="greeting-name">Happy Beginnings Surrogacy</span>
+
   // Fallback: JS variable name that holds the agency code (used if selector finds nothing).
   // Set to null to disable. Disabled here: the page's `agencyCode` identifier is a DOM
   // element reference, not the code string, so the selector above is authoritative.
@@ -79,7 +83,9 @@ async function downloadAgencyGuide(event) {
 
   try {
     const pdfBytes = await buildPersonalizedPdf(agencyId);
-    triggerDownload(pdfBytes, `Newborn_Insurance_Agency_Guide_${sanitizeFilename(agencyId)}.pdf`);
+    const agencyName = resolveAgencyName();
+    const fileLabel = agencyName || agencyId; // fall back to code if name not found
+    triggerDownload(pdfBytes, `Newborn_Insurance_Agency_Guide_${sanitizeFilename(fileLabel)}.pdf`);
   } catch (err) {
     console.error("Agency Guide PDF generation failed:", err);
     alert("Sorry, there was a problem generating the PDF. Please try again or contact Maverick Administrators.");
@@ -151,6 +157,21 @@ function resolveAgencyCode() {
   // Try global variable
   if (cfg.agencyCodeVariable && window[cfg.agencyCodeVariable]) {
     return String(window[cfg.agencyCodeVariable]).trim();
+  }
+
+  return null;
+}
+
+/**
+ * Resolves the agency name from the page via the DOM selector.
+ * Used for the downloaded filename; returns null if not found.
+ */
+function resolveAgencyName() {
+  const cfg = AGENCY_GUIDE_CONFIG;
+
+  if (cfg.agencyNameSelector) {
+    const el = document.querySelector(cfg.agencyNameSelector);
+    if (el && el.textContent.trim()) return el.textContent.trim();
   }
 
   return null;
