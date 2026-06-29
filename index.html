@@ -1895,8 +1895,8 @@
 
     <!-- Greeting card -->
     <section class="card greeting-card hidden" id="greeting-card" aria-live="polite">
-      <div class="eyebrow">Agency Verified</div>
-      <h2>Hi <span class="greeting-name" id="greeting-name"></span>. Your Agency Code is <span class="code-pill" id="agency-code"></span>.</h2>
+      <div class="eyebrow" id="greeting-eyebrow">Agency Verified</div>
+      <h2>Hi <span class="greeting-name" id="greeting-name"></span>. Your <span id="code-label">Agency Code</span> is <span class="code-pill" id="agency-code"></span>.</h2>
       <p class="meta-line" id="meta-line"></p>
       <div class="reminder" id="reminder-banner">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1923,8 +1923,8 @@
           </a>
         </div>
         <div class="guide-content">
-          <div class="guide-label">Agency Resource</div>
-          <h3 class="guide-title">Newborn Insurance Agency Guide</h3>
+          <div class="guide-label" id="guide-label">Agency Resource</div>
+          <h3 class="guide-title" id="guide-title">Newborn Insurance Agency Guide</h3>
           <p class="guide-desc">Your complete field reference for the Newborn Medical Contractual Liability Insurance program — from application through the end of the coverage period.</p>
           <ul class="guide-highlights">
             <li>
@@ -2593,6 +2593,10 @@
   const errorCard = document.getElementById("error-card");
   const greetingCard = document.getElementById("greeting-card");
   const greetingName = document.getElementById("greeting-name");
+  const greetingEyebrow = document.getElementById("greeting-eyebrow");
+  const codeLabel = document.getElementById("code-label");
+  const guideLabel = document.getElementById("guide-label");
+  const guideTitle = document.getElementById("guide-title");
   const agencyCode = document.getElementById("agency-code");
   const metaLine = document.getElementById("meta-line");
   const reminderText = document.getElementById("reminder-text");
@@ -2694,10 +2698,17 @@
     state.agency = agency;
     const stateFull = stateNames[agency.state] || agency.state;
 
+    const isSeedTrust = agency.id === "SeedTrust";
+    const codeWord = isSeedTrust ? "Code" : "Agency Code";
+
     greetingName.textContent = agency.name;
+    greetingEyebrow.textContent = isSeedTrust ? "Verified" : "Agency Verified";
+    codeLabel.textContent = codeWord;
+    guideLabel.textContent = isSeedTrust ? "Resource" : "Agency Resource";
+    guideTitle.textContent = isSeedTrust ? "Newborn Insurance Guide" : "Newborn Insurance Agency Guide";
     agencyCode.textContent = agency.id;
     metaLine.innerHTML = `Issuing State: <strong>${stateFull} (${agency.state})</strong>. Below you will find the rates for your issuing state.`;
-    reminderText.textContent = `Please save this information before continuing. You will need your Agency Code (${agency.id}) and the rates below when filling out the application form.`;
+    reminderText.textContent = `Please save this information before continuing. You will need your ${codeWord} (${agency.id}) and the rates below when filling out the application form.`;
 
     ratesSubtitle.textContent = `Singleton policy rates for ${stateFull} — current as of 2026.`;
     renderRates(agency.state);
