@@ -1851,7 +1851,7 @@
       <div class="broker-badge">Whillock</div>
       <h1>Newborn Medical Contractual<br><em>Liability Insurance Portal</em></h1>
       <div class="header-rule" aria-hidden="true"></div>
-      <p class="subtitle">Enter your agency name and press Enter to retrieve your agency code, review your issuing-state rates, and open the correct application form.</p>
+      <p class="subtitle" id="page-subtitle">Enter your agency name and press Enter to retrieve your agency code, review your issuing-state rates, and open the correct application form.</p>
     </div>
   </header>
 
@@ -1861,7 +1861,7 @@
       <label for="agency-input" class="search-label" id="search-label">Surrogacy Agency Lookup</label>
       <div class="new-agency-notice">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>
+        <span id="new-agency-text">
           Not an approved agency yet? Please complete the
           <a href="https://share-na2.hsforms.com/2XRnyEcg8TuWMGCM1zsfaVQsu007" target="_blank">New Agency / Entity Set-Up Form</a>
           to begin your approval process.
@@ -2075,13 +2075,13 @@
             <span class="box-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="10" height="18" rx="1"/><path d="M14 9h5a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-5"/><path d="M8 7h2M8 11h2M8 15h2"/></svg>
             </span>
-            From the Agency
+            <span id="checklist-box-heading">From the Agency</span>
           </h4>
           <ul>
-            <li>Agency Contact First Name</li>
-            <li>Agency Contact Last Name</li>
-            <li>Agency Contact Email Address</li>
-            <li>Agency Contact Phone Number</li>
+            <li id="checklist-contact-first">Agency Contact First Name</li>
+            <li id="checklist-contact-last">Agency Contact Last Name</li>
+            <li id="checklist-contact-email">Agency Contact Email Address</li>
+            <li id="checklist-contact-phone">Agency Contact Phone Number</li>
           </ul>
         </div>
 
@@ -2214,7 +2214,7 @@
           </svg>
           surrogacy@mavericktpa.com
         </a>
-        <span class="footer-note">For agency use only</span>
+        <span class="footer-note" id="footer-note">For agency use only</span>
       </div>
     </div>
     <div class="footer-bottom">
@@ -2597,6 +2597,16 @@
   const codeLabel = document.getElementById("code-label");
   const guideLabel = document.getElementById("guide-label");
   const guideTitle = document.getElementById("guide-title");
+  const pageSubtitle = document.getElementById("page-subtitle");
+  const searchLabel = document.getElementById("search-label");
+  const newAgencyText = document.getElementById("new-agency-text");
+  const checklistBoxHeading = document.getElementById("checklist-box-heading");
+  const checklistContactFirst = document.getElementById("checklist-contact-first");
+  const checklistContactLast = document.getElementById("checklist-contact-last");
+  const checklistContactEmail = document.getElementById("checklist-contact-email");
+  const checklistContactPhone = document.getElementById("checklist-contact-phone");
+  const footerNote = document.getElementById("footer-note");
+  const newAgencyFormUrl = "https://share-na2.hsforms.com/2XRnyEcg8TuWMGCM1zsfaVQsu007";
   const agencyCode = document.getElementById("agency-code");
   const metaLine = document.getElementById("meta-line");
   const reminderText = document.getElementById("reminder-text");
@@ -2706,6 +2716,20 @@
     codeLabel.textContent = codeWord;
     guideLabel.textContent = isSeedTrust ? "Resource" : "Agency Resource";
     guideTitle.textContent = isSeedTrust ? "Newborn Insurance Guide" : "Newborn Insurance Agency Guide";
+
+    pageSubtitle.textContent = isSeedTrust
+      ? "Enter your name and press Enter to retrieve your code, review your issuing-state rates, and open the correct application form."
+      : "Enter your agency name and press Enter to retrieve your agency code, review your issuing-state rates, and open the correct application form.";
+    searchLabel.textContent = isSeedTrust ? "Surrogacy Lookup" : "Surrogacy Agency Lookup";
+    newAgencyText.innerHTML = isSeedTrust
+      ? `Not approved yet? Please complete the <a href="${newAgencyFormUrl}" target="_blank">New Entity Set-Up Form</a> to begin your approval process.`
+      : `Not an approved agency yet? Please complete the <a href="${newAgencyFormUrl}" target="_blank">New Agency / Entity Set-Up Form</a> to begin your approval process.`;
+    checklistBoxHeading.textContent = isSeedTrust ? "From the Submitter" : "From the Agency";
+    checklistContactFirst.textContent = isSeedTrust ? "Contact First Name" : "Agency Contact First Name";
+    checklistContactLast.textContent = isSeedTrust ? "Contact Last Name" : "Agency Contact Last Name";
+    checklistContactEmail.textContent = isSeedTrust ? "Contact Email Address" : "Agency Contact Email Address";
+    checklistContactPhone.textContent = isSeedTrust ? "Contact Phone Number" : "Agency Contact Phone Number";
+    footerNote.textContent = isSeedTrust ? "For internal use only" : "For agency use only";
     agencyCode.textContent = agency.id;
     metaLine.innerHTML = `Issuing State: <strong>${stateFull} (${agency.state})</strong>. Below you will find the rates for your issuing state.`;
     reminderText.textContent = `Please save this information before continuing. You will need your ${codeWord} (${agency.id}) and the rates below when filling out the application form.`;
