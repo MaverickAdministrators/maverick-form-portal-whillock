@@ -1192,7 +1192,7 @@
   .policy-band-inner {
     position: relative;
     z-index: 1;
-    max-width: 780px;
+    max-width: 1080px;
     margin: 0 auto;
     text-align: center;
   }
@@ -1247,10 +1247,10 @@
 
   .policy-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 16px;
     margin-bottom: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   .policy-card {
@@ -1281,7 +1281,7 @@
   .policy-card-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 12px;
     margin-bottom: 8px;
   }
@@ -1295,7 +1295,9 @@
   }
 
   .policy-card-check {
-    flex: 0 0 auto;
+    position: absolute;
+    top: 22px;
+    right: 22px;
     display: grid;
     place-items: center;
     width: 26px;
@@ -1319,6 +1321,7 @@
     font-size: 13px;
     line-height: 1.55;
     color: rgba(229, 234, 242, 0.66);
+    text-align: center;
   }
 
   .policy-card.active {
@@ -2271,6 +2274,15 @@
           </span>
           <span class="policy-card-desc">A single embryo is transferred — coverage for one expected baby.</span>
         </button>
+        <button type="button" class="policy-card" data-policy="Singleton Pre-Transfer" id="btn-pre-transfer" role="radio" aria-checked="false">
+          <span class="policy-card-head">
+            <span class="policy-card-name">Singleton Pre-Transfer</span>
+            <span class="policy-card-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+            </span>
+          </span>
+          <span class="policy-card-desc">For a singleton applied for pre-transfer — the Estimated Date of Embryo Transfer is still in the future.</span>
+        </button>
         <button type="button" class="policy-card" data-policy="Split Embryo" id="btn-split" role="radio" aria-checked="false">
           <span class="policy-card-head">
             <span class="policy-card-name">Split Embryo</span>
@@ -2620,6 +2632,7 @@
 
   const forms = {
     singleton: "https://su007.share-na2.hsforms.com/23qCzBemDTdaaBbqtCL9FGw",
+    singleton_pre_transfer: "https://share-na2.hsforms.com/2BMXIWXA0RTajLjf3LwKKugsu007",
     split: "https://su007.share-na2.hsforms.com/2XpfBqVzGQ0yNCLbTag-xgQ"
   };
 
@@ -2720,6 +2733,7 @@
   const specimenCard = document.getElementById("specimen-card");
   const policyBand = document.getElementById("policy-band");
   const btnSingleton = document.getElementById("btn-singleton");
+  const btnPreTransfer = document.getElementById("btn-pre-transfer");
   const btnSplit = document.getElementById("btn-split");
   const openBtn = document.getElementById("open-form");
 
@@ -2897,15 +2911,17 @@
 
   function selectPolicy(policy) {
     state.policy = policy;
-    const isSingle = policy === "singleton";
-    btnSingleton.classList.toggle("active", isSingle);
-    btnSplit.classList.toggle("active", !isSingle);
-    btnSingleton.setAttribute("aria-checked", isSingle ? "true" : "false");
-    btnSplit.setAttribute("aria-checked", !isSingle ? "true" : "false");
+    btnSingleton.classList.toggle("active", policy === "singleton");
+    btnPreTransfer.classList.toggle("active", policy === "singleton_pre_transfer");
+    btnSplit.classList.toggle("active", policy === "split");
+    btnSingleton.setAttribute("aria-checked", policy === "singleton" ? "true" : "false");
+    btnPreTransfer.setAttribute("aria-checked", policy === "singleton_pre_transfer" ? "true" : "false");
+    btnSplit.setAttribute("aria-checked", policy === "split" ? "true" : "false");
     updateOpenButton();
   }
 
   btnSingleton.addEventListener("click", () => selectPolicy("singleton"));
+  btnPreTransfer.addEventListener("click", () => selectPolicy("singleton_pre_transfer"));
   btnSplit.addEventListener("click", () => selectPolicy("split"));
 
   // -------- Policy Specimens --------
