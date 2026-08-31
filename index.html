@@ -1105,6 +1105,39 @@
     height: 3px;
   }
 
+  /* Process heads-up inside a checklist column. Inherits the column's own
+     --accent-* palette, so it picks up the gold of .box-ip automatically. */
+  .checklist-note {
+    margin: 16px 0 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--accent-line);
+    border-left: 3px solid var(--accent);
+    background: var(--accent-wash-strong);
+    color: var(--navy);
+    font-size: 11.5px;
+    line-height: 1.6;
+  }
+
+  .checklist-note strong {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  .checklist-note strong svg {
+    flex: 0 0 auto;
+    width: 13px;
+    height: 13px;
+    margin-top: 1px;
+  }
+
   .new-agency-notice {
     display: flex;
     align-items: flex-start;
@@ -2170,6 +2203,14 @@
             <li>Newborn Gender (if known)</li>
             <li>Newborn Last Name</li>
           </ul>
+
+          <div class="checklist-note">
+            <strong>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+              Heads up — Domestic (U.S. Resident) Intended Parents
+            </strong>
+            If the Intended Parent(s) reside in the United States, check the domestic attestation box in the application form. That checkbox is what identifies the submission as a domestic policy on our end — leave it unchecked for International Intended Parents. After we receive the application, we'll send the Intended Parent(s) the attestation itself to review and sign.
+          </div>
         </div>
 
         <div class="checklist-box box-surrogate">
@@ -2219,8 +2260,8 @@
     <section class="card specimen-card hidden" id="specimen-card" aria-labelledby="specimen-heading">
       <div class="checklist-header">
         <div class="checklist-eyebrow">Reference</div>
-        <h3 class="checklist-title" id="specimen-heading">Policy Specimens</h3>
-        <p class="checklist-subtitle">Preview a sample of the actual policy documents issued for each coverage type — provided for reference before purchase.</p>
+        <h3 class="checklist-title" id="specimen-heading">Policy Specimens — International Intended Parents</h3>
+        <p class="checklist-subtitle">Preview a sample of the actual policy documents issued for each coverage type when the Intended Parent(s) reside outside the United States — provided for reference before purchase.</p>
       </div>
 
       <div class="specimen-grid">
@@ -2243,6 +2284,45 @@
           <h4 class="specimen-title">Split Embryo Policy Specimen</h4>
           <p class="specimen-note">Includes Declarations Page + Medical CLIP — downloads as two PDFs.</p>
           <button type="button" class="guide-download-btn specimen-download-btn" id="btn-specimen-split" aria-label="Download Split Embryo Policy Specimen — Declarations Page and Medical CLIP PDFs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 11l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download Specimen
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Policy Specimens card — Domestic -->
+    <section class="card specimen-card hidden" id="specimen-card-domestic" aria-labelledby="specimen-heading-domestic">
+      <div class="checklist-header">
+        <div class="checklist-eyebrow">Reference</div>
+        <h3 class="checklist-title" id="specimen-heading-domestic">Policy Specimens — Domestic (U.S. Resident) Intended Parents</h3>
+        <p class="checklist-subtitle">Preview a sample of the actual policy documents issued for each coverage type when the Intended Parent(s) reside in the United States — provided for reference before purchase.</p>
+      </div>
+
+      <div class="specimen-grid">
+        <div class="specimen-box">
+          <img src="domestic-singleton-specimen-cover.png" alt="Domestic Singleton Policy Specimen cover preview" class="guide-thumb specimen-thumb" loading="lazy" />
+          <h4 class="specimen-title">Singleton Policy Specimen</h4>
+          <p class="specimen-note">Includes Declarations Page + Medical CLIP — downloads as two PDFs.</p>
+          <button type="button" class="guide-download-btn specimen-download-btn" id="btn-specimen-domestic-singleton" aria-label="Download Domestic Singleton Policy Specimen — Declarations Page and Medical CLIP PDFs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 11l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download Specimen
+          </button>
+        </div>
+
+        <div class="specimen-box">
+          <img src="domestic-split-embryo-specimen-cover.png" alt="Domestic Split Embryo Policy Specimen cover preview" class="guide-thumb specimen-thumb" loading="lazy" />
+          <h4 class="specimen-title">Split Embryo Policy Specimen</h4>
+          <p class="specimen-note">Includes Declarations Page + Medical CLIP — downloads as two PDFs.</p>
+          <button type="button" class="guide-download-btn specimen-download-btn" id="btn-specimen-domestic-split" aria-label="Download Domestic Split Embryo Policy Specimen — Declarations Page and Medical CLIP PDFs">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               <path d="M7 11l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2741,6 +2821,7 @@
   const ratesBodySE = document.getElementById("rates-body-se");
   const selectorCard = document.getElementById("selector-card");
   const specimenCard = document.getElementById("specimen-card");
+  const specimenCardDomestic = document.getElementById("specimen-card-domestic");
   const policyBand = document.getElementById("policy-band");
   const btnSingleton = document.getElementById("btn-singleton");
   const btnPreTransfer = document.getElementById("btn-pre-transfer");
@@ -2787,7 +2868,7 @@
   // Result cards in display order. Each reveals as it scrolls into view,
   // so the page unfolds like a premium launch sequence rather than firing
   // every animation at once while most cards are still below the fold.
-  const resultCards = [greetingCard, guideCard, ratesCard, ratesCardSE, selectorCard, specimenCard, policyBand];
+  const resultCards = [greetingCard, guideCard, ratesCard, ratesCardSE, selectorCard, specimenCard, specimenCardDomestic, policyBand];
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -2869,6 +2950,7 @@
     ratesCardSE.classList.remove("hidden");
     selectorCard.classList.remove("hidden");
     specimenCard.classList.remove("hidden");
+    specimenCardDomestic.classList.remove("hidden");
     policyBand.classList.remove("hidden");
     guideCard.style.display = "block";
     replayReveal();
@@ -2884,6 +2966,7 @@
     ratesCardSE.classList.add("hidden");
     selectorCard.classList.add("hidden");
     specimenCard.classList.add("hidden");
+    specimenCardDomestic.classList.add("hidden");
     policyBand.classList.add("hidden");
     guideCard.style.display = "none";
     errorCard.style.animation = "none";
@@ -2944,6 +3027,14 @@
       { href: "split-embryo-dec-page-specimen.pdf", filename: "Split_Embryo_Policy_Specimen_Declarations_Page.pdf" },
       { href: "split-embryo-medical-clip-specimen.pdf", filename: "Split_Embryo_Policy_Specimen_Medical_CLIP.pdf" },
     ],
+    domesticSingleton: [
+      { href: "domestic-singleton-dec-page-specimen.pdf", filename: "Domestic_Singleton_Policy_Specimen_Declarations_Page.pdf" },
+      { href: "domestic-singleton-medical-clip-specimen.pdf", filename: "Domestic_Singleton_Policy_Specimen_Medical_CLIP.pdf" },
+    ],
+    domesticSplit: [
+      { href: "domestic-split-embryo-dec-page-specimen.pdf", filename: "Domestic_Split_Embryo_Policy_Specimen_Declarations_Page.pdf" },
+      { href: "domestic-split-embryo-medical-clip-specimen.pdf", filename: "Domestic_Split_Embryo_Policy_Specimen_Medical_CLIP.pdf" },
+    ],
   };
 
   // Some browsers silently block the second of two back-to-back programmatic
@@ -2963,6 +3054,8 @@
 
   document.getElementById("btn-specimen-singleton").addEventListener("click", () => downloadPolicySpecimens(specimenFiles.singleton));
   document.getElementById("btn-specimen-split").addEventListener("click", () => downloadPolicySpecimens(specimenFiles.split));
+  document.getElementById("btn-specimen-domestic-singleton").addEventListener("click", () => downloadPolicySpecimens(specimenFiles.domesticSingleton));
+  document.getElementById("btn-specimen-domestic-split").addEventListener("click", () => downloadPolicySpecimens(specimenFiles.domesticSplit));
 
   function updateOpenButton() {
     const ready = !!state.agency && !!state.policy;
